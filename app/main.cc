@@ -1,10 +1,11 @@
 #include <iostream>
-#include "ConsoleSinkImpl.h"
+#include <chrono>
+#include "LogMessage.h"
 
 int main(int argc, char const *argv[])
 {
-    ConsoleSinkImpl d;
-    d.write("test");
-    std::cout<<"Hello World\n";
+    LogMessage msg("testapp", "ctx", std::chrono::system_clock::now(), LogLevel::DEBUG, "Hello World");
+
+    std::cout << msg;
     return 0;
 }

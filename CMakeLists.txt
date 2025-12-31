@@ -6,7 +6,12 @@ project(ldog)
 
 add_executable(
     ${PROJECT_NAME}
-    src/main.cc
+    src/ILogSink.cc
+    src/FileSinkImpl.cc
+    src/LogManager.cc
+    src/LogMessage.cc
+    src/ConsoleSinkImpl.cc
+    main.cc
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE inc/)

@@ -1,0 +1,5 @@
+cc_binary(
+    name = "app",
+    srcs = ["app/main.cc"] + glob(["src/*.cc", "inc/*.h"]),
+    visibility = ["//visibility:public"],
+)

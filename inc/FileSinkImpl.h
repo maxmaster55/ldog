@@ -6,6 +6,6 @@ class FileSinkImpl: public ILogSink
 {
 public:
     FileSinkImpl() = default;
-    int write(std::string str);
+    void write(LogMessage& msg);
     ~FileSinkImpl() = default;
 };

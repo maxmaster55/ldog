@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include "LogMessage.h"
 #include "ILogSink.h"
@@ -9,7 +10,7 @@ class LogManager
 {
 private:
     std::vector<LogMessage> buffer;
-    std::vector<ILogSink&> sinks;
+    std::vector<ILogSink> sinks = {};
 
 public:
     LogManager() = default;

@@ -11,7 +11,7 @@ add_executable(
     src/LogManager.cc
     src/LogMessage.cc
     src/ConsoleSinkImpl.cc
-    main.cc
+    app/main.cc
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE inc/)

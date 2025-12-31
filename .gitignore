@@ -1,4 +1,6 @@
 build
+*.lock
+bazel-*
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles

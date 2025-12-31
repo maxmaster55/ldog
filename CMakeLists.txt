@@ -6,7 +6,6 @@ project(ldog)
 
 add_executable(
     ${PROJECT_NAME}
-    src/ILogSink.cc
     src/FileSinkImpl.cc
     src/LogManager.cc
     src/LogMessage.cc

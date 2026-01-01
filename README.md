@@ -1,2 +1,2 @@
-# ldog
-logging and telemetry lib built as a project in the ITI
+# LogDog
+logging and telemetry app built as a project in the ITI

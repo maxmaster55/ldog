@@ -2,7 +2,7 @@
 
 #include <string>
 #include <unistd.h>
-
+#include <fcntl.h>
 
 class SafeFile
 {
@@ -10,9 +10,10 @@ class SafeFile
 
 private:
     string path;
-    int fd;
+    int fd = -1;
 public:
-    SafeFile();
+    SafeFile(string path);
+    void write(std::string& str);
     // move
     SafeFile(SafeFile&& other) noexcept;
     SafeFile& operator =(SafeFile&& other) noexcept;

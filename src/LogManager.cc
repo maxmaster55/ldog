@@ -13,10 +13,9 @@ void LogManager::write()
         {
             sink->write(msg);
         }
-        
     }
 
-    
+    messages.clear(); // empty the buffer
 }
 
 

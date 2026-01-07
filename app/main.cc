@@ -1,16 +1,16 @@
 #include <iostream>
-#include <tel_src/FileTelemetrySourceImpl.h>
+#include <protection/SafeSocket.h>
 
 int main(int argc, char const *argv[])
-{   
-    FileTelemetrySrc fts("/home/maxmaster/shell_logs");
+{
+    SafeSocket sock("127.0.0.1", 9000);
 
-    std::string out_str;
+    sock.sendString("Hello server\n");
 
-    fts.openSource();
-
-    while (fts.readSource(out_str))
-        std::cout << out_str << "\n";
+    std::string line;
+    if (sock.recvString(line)) {
+        std::cout << "Received: " << line << "\n";
+    }
 
     
     return 0;

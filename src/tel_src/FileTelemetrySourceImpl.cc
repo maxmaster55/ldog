@@ -1,19 +1,19 @@
 #include <tel_src/FileTelemetrySourceImpl.h>
 
 
-FileTelemetrySourceImpl::FileTelemetrySourceImpl(string path)
+FileTelemetrySrc::FileTelemetrySrc(string path)
 : path(std::move(path))
 {}
 
 
-bool FileTelemetrySourceImpl::openSource()
+bool FileTelemetrySrc::openSource()
 {
     file = SafeFile(path);
     return true;
     
 }
 
-bool FileTelemetrySourceImpl::readSource(string& out)
+bool FileTelemetrySrc::readSource(string& out)
 {
     if (!file)
     {

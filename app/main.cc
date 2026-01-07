@@ -3,7 +3,7 @@
 
 int main(int argc, char const *argv[])
 {   
-    FileTelemetrySourceImpl fts("/home/maxmaster/shell_logs");
+    FileTelemetrySrc fts("/home/maxmaster/shell_logs");
 
     std::string out_str;
 

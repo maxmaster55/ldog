@@ -3,7 +3,7 @@
 #include "ITelemetrySource.h"
 #include "protection/SafeFile.h"
 
-class FileTelemetrySourceImpl: public ITelemetrySource
+class FileTelemetrySrc: public ITelemetrySource
 {
     using string = std::string;
 private:
@@ -11,8 +11,8 @@ private:
     std::optional<SafeFile> file;
     
 public:
-    FileTelemetrySourceImpl(string path);
+    FileTelemetrySrc(string path);
     bool openSource() override;
     bool readSource(string& out) override;
-    ~FileTelemetrySourceImpl() = default;
+    ~FileTelemetrySrc() = default;
 };

@@ -10,5 +10,5 @@ private:
 public:
     virtual bool openSource() = 0;
     virtual bool readSource(string& out) = 0;
-    ~ITelemetrySource() = default;
+    virtual ~ITelemetrySource();
 };

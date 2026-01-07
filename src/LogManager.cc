@@ -6,7 +6,7 @@ void LogManager::add_sink(unique_ptr<ILogSink> sink)
     sinks.push_back(std::move(sink));
 }
 
-void LogManager::write_to_all()
+void LogManager::write()
 {
     for (auto& sink : sinks){
         for (auto msg : messages)

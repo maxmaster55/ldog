@@ -20,6 +20,6 @@ public:
     void add_msg(LogMessage& msg);
     LogManager& operator<<(LogMessage& msg);
     void add_sink(unique_ptr<ILogSink> sink);
-    void write_to_all();
+    void write();
     ~LogManager() = default;
 };

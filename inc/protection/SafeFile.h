@@ -13,7 +13,8 @@ private:
     int fd = -1;
 public:
     SafeFile(string path);
-    void write(std::string& str);
+    void write(string& str);
+    bool readLine(string& out);
     // move
     SafeFile(SafeFile&& other) noexcept;
     SafeFile& operator =(SafeFile&& other) noexcept;

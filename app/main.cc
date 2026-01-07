@@ -3,8 +3,8 @@
 #include <memory>
 #include "LogMessage.h"
 #include "LogManager.h"
-#include "ConsoleSinkImpl.h"
-#include "FileSinkImpl.h"
+#include "./sinks/ConsoleSinkImpl.h"
+#include "./sinks/FileSinkImpl.h"
 
 int main(int argc, char const *argv[])
 {

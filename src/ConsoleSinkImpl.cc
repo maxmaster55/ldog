@@ -1,4 +1,4 @@
-#include "ConsoleSinkImpl.h"
+#include "./sinks/ConsoleSinkImpl.h"
 
 void ConsoleSinkImpl::write(LogMessage& msg)
 {

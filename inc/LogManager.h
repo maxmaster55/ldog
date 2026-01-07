@@ -2,7 +2,7 @@
 #include <vector>
 #include <memory>
 #include "LogMessage.h"
-#include "ILogSink.h"
+#include "./sinks/ILogSink.h"
 
 /* LogManager → a class that for now stores LogMessage objects into a private buffer
  *              and has a method that routes the messages into all sinks.

@@ -1,6 +1,7 @@
+#pragma once
 #include <iostream>
 #include <string>
-
+#include "LogMessage.h"
 
 
 class ILogSink
@@ -8,6 +9,6 @@ class ILogSink
 private:
 
 public:
-    virtual int write(std::string str) = 0;
+    virtual void write(LogMessage& msg) = 0;
     virtual ~ILogSink() = default;
 };

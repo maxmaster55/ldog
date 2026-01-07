@@ -1,25 +1,31 @@
+#pragma once
 #include <string>
 #include <chrono>
 
 
-enum class message_sev{
-
+enum class LogLevel {
+    DEBUG,
+    INFO,
+    WARNING,
+    ERROR,
+    FATAL
 };
-
 class LogMessage
 {
     using clock = std::chrono::system_clock;
     using time_point = clock::time_point;
     using string = std::string;
-
-private:
+public:
     string app_name;
     string context;
     time_point time;
-    message_sev severity;
+    LogLevel level;
     string text;
 
-public:
-    LogMessage(string app_name, string context, time_point time, message_sev severity, string text);
+    LogMessage(string app_name, string context, time_point time, LogLevel level, string text);
     ~LogMessage() = default;
 };
+
+
+std::ostream& operator<<(std::ostream& os, const LogMessage& msg);
+std::ostream& operator<<(std::ostream& os, const LogLevel& level);

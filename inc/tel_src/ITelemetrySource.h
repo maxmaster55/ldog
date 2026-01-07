@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <optional>
 
 class ITelemetrySource
 {
@@ -10,5 +11,5 @@ private:
 public:
     virtual bool openSource() = 0;
     virtual bool readSource(string& out) = 0;
-    virtual ~ITelemetrySource();
+    virtual ~ITelemetrySource() = default;
 };

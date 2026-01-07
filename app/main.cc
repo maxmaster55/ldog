@@ -1,16 +1,17 @@
 #include <iostream>
-#include <protection/SafeSocket.h>
+#include <tel_src/SocketTelemetrySourceImpl.h>
 
 int main(int argc, char const *argv[])
-{
-    SafeSocket sock("127.0.0.1", 9000);
+{   
+    SocketTelemetrySrc fts("127.0.0.1", 9000);
 
-    sock.sendString("Hello server\n");
+    std::string out_str;
 
-    std::string line;
-    if (sock.recvString(line)) {
-        std::cout << "Received: " << line << "\n";
-    }
+    fts.openSource();
+
+    while (fts.readSource(out_str))
+        std::cout << out_str << "\n";
+
 
     
     return 0;

@@ -6,10 +6,10 @@ project(ldog)
 
 add_executable(
     ${PROJECT_NAME}
-    src/FileSinkImpl.cc
+    src/sinks/FileSinkImpl.cc
+    src/sinks/ConsoleSinkImpl.cc
     src/LogManager.cc
     src/LogMessage.cc
-    src/ConsoleSinkImpl.cc
     app/main.cc
 )
 

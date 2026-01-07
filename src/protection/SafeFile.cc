@@ -1,12 +1,15 @@
 #include "./protection/SafeFile.h"
+#include <errno.h>
+#include <iostream>
 
-
-SafeFile::SafeFile(string path): path(std::move(path))
+SafeFile::SafeFile(string _path): path(std::move(_path))
 {
     this->path = path;
 
     fd = open(path.c_str(), O_RDWR);
     if (fd == -1) {
+        std::cout << "file" << path << "\n"; 
+        perror("error opening file");
         exit(1); // for now
     }
 }
@@ -60,7 +63,7 @@ SafeFile::SafeFile(SafeFile&& other) noexcept
     other.path.clear();
 }
 
-SafeFile& SafeFile::operator =(SafeFile&& other)
+SafeFile& SafeFile::operator =(SafeFile&& other) noexcept
 {
     if (this != &other) {
         // release current resource

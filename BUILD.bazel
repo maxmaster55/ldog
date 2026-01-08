@@ -1,5 +1,17 @@
+cc_library(
+    name = "ldog_lib",
+    srcs = glob([
+        "src/**/*.cc",
+    ]),
+    hdrs = glob([
+        "inc/**/*.h",
+    ]),
+    includes = ["inc"],
+    visibility = ["//visibility:public"],
+)
+
 cc_binary(
     name = "app",
-    srcs = ["app/main.cc"] + glob(["src/*.cc", "inc/*.h"]),
-    visibility = ["//visibility:public"],
+    srcs = ["app/main.cc"],
+    deps = [":ldog_lib"],
 )

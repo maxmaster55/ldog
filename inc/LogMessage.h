@@ -1,15 +1,10 @@
 #pragma once
+#include <log_types.h>
 #include <string>
 #include <chrono>
 
 
-enum class LogLevel {
-    DEBUG,
-    INFO,
-    WARNING,
-    ERROR,
-    FATAL
-};
+
 class LogMessage
 {
     using clock = std::chrono::system_clock;
@@ -19,13 +14,12 @@ public:
     string app_name;
     string context;
     time_point time;
-    LogLevel level;
+    SeverityLvl level;
     string text;
 
-    LogMessage(string app_name, string context, time_point time, LogLevel level, string text);
+    LogMessage(string app_name, string context, time_point time, SeverityLvl level, string text);
     ~LogMessage() = default;
 };
 
 
 std::ostream& operator<<(std::ostream& os, const LogMessage& msg);
-std::ostream& operator<<(std::ostream& os, const LogLevel& level);

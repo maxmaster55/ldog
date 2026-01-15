@@ -13,11 +13,11 @@ class LogMessage
 public:
     string app_name;
     string context;
-    time_point time;
+    string time;
     SeverityLvl level;
     string text;
 
-    LogMessage(string app_name, string context, time_point time, SeverityLvl level, string text);
+    LogMessage(string app_name, string context, string time, SeverityLvl level, string text);
     ~LogMessage() = default;
 };
 

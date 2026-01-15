@@ -21,5 +21,32 @@ public:
     LogManager& operator<<(LogMessage& msg);
     void add_sink(unique_ptr<ILogSink> sink);
     void write();
+    // copy
+    LogManager(const LogManager&) = delete;
+    LogManager& operator=(const LogManager&) = delete;
+    // move
+    LogManager(LogManager&& other) noexcept = default;
+    LogManager& operator=(LogManager&& other) noexcept = default;
     ~LogManager() = default;
+};
+
+
+class LogManagerBuilder{
+private:  
+    LogManager manager;
+public:
+    LogManagerBuilder& add_sink(unique_ptr<ILogSink> sink)
+    {
+        manager.add_sink(std::move(sink));
+        return *this;
+    }
+    LogManagerBuilder& add_msg(LogMessage& msg){
+        manager.add_msg(msg);
+        return *this;
+    }
+    LogManager build(){
+        return std::move(manager);
+    }
+    
+    ~LogManagerBuilder() = default;
 };

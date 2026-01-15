@@ -9,7 +9,7 @@ void LogManager::add_sink(unique_ptr<ILogSink> sink)
 void LogManager::write()
 {
     for (auto& sink : sinks){
-        for (auto msg : messages)
+        for (auto& msg : messages)
         {
             sink->write(msg);
         }

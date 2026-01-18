@@ -38,6 +38,9 @@ enable_testing()
 add_executable(
     tests
     tests/msg_tests.cc
+    tests/log_manager_tests.cc
+    tests/message_extended_tests.cc
+    tests/sink_tests.cc
 )
 
 target_include_directories(tests PRIVATE inc/)

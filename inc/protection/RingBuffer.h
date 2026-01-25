@@ -32,7 +32,7 @@ public:
     RingBuffer(const RingBuffer&) = delete;
     RingBuffer& operator=(const RingBuffer&) = delete;
 
-    bool tryPush(T&& value) {
+    bool tryPush(T value) {
         if (_full) return false;
         _buffer[_head] = std::move(value);
         advance(_head);

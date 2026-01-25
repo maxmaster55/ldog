@@ -8,19 +8,25 @@ void LogManager::add_sink(unique_ptr<ILogSink> sink)
 
 void LogManager::write()
 {
+    int msgs_size = messages.size();
     for (auto& sink : sinks){
-        for (auto& msg : messages)
-        {
-            sink->write(msg);
+        for (int i = 0; i < msgs_size; i++){
+            auto msg = messages.tryPop();
+            if (msg)
+            {
+                sink->write(msg.value());
+            }
+            
         }
     }
-
-    messages.clear(); // empty the buffer
 }
 
 
 void LogManager::add_msg(LogMessage& msg){
-    messages.push_back(msg);
+    if (!messages.tryPush(msg))
+    {
+        std::cout << "error, full\n";
+    }
 }
 
 LogManager& LogManager::operator<<(LogMessage& msg){

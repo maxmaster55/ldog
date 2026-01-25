@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include <protection/RingBuffer.h>
 #include "LogMessage.h"
 #include "./sinks/ILogSink.h"
 
@@ -12,11 +13,11 @@ using std::unique_ptr;
 class LogManager
 {
 private:
-    std::vector<LogMessage> messages;
+    RingBuffer<LogMessage> messages;
     std::vector<unique_ptr<ILogSink>> sinks;
 
 public:
-    LogManager() = default;
+    LogManager(int capacity): messages(capacity) {}
     void add_msg(LogMessage& msg);
     LogManager& operator<<(LogMessage& msg);
     void add_sink(unique_ptr<ILogSink> sink);
@@ -35,6 +36,8 @@ class LogManagerBuilder{
 private:  
     LogManager manager;
 public:
+    LogManagerBuilder(int capacity): manager(capacity) {}
+
     LogManagerBuilder& add_sink(unique_ptr<ILogSink> sink)
     {
         manager.add_sink(std::move(sink));

@@ -1,23 +1,33 @@
 #include <iostream>
-#include <protection/RingBuffer.h>
+#include <chrono>
+#include <memory>
+#include "LogMessage.h"
+#include "LogManager.h"
+
 
 int main(int argc, char const *argv[])
 {
+    LogManager manager(10);
 
 
-    RingBuffer<int> bf(3);
+    LogMessage msg1("hi", "ctx", "SeverityLvl", SeverityLvl::WARNING, "Hello World, Happy to be alive.");
+    manager << msg1;
+    LogMessage msg2("cat", "cat_ctx", "SeverityLvl", SeverityLvl::CRITICAL, "Hello cat, the app is about to crash, please do smth.");
+    manager << msg2;
+    LogMessage msg3("test", "ctx", "SeverityLvl", SeverityLvl::INFO, "Bye World, I'm not about to kill myself, just sleep.");
+    manager << msg3;
+    manager << msg3;
+    manager << msg3;
+    manager << msg3;
+    manager << msg3;
+    manager << msg3;
+    manager << msg3;
+    manager << msg3;
+    manager << msg3;
+    manager << msg3;
+    manager << msg3;
 
-    bf.tryPush(5);
-    bf.tryPush(5);
-    bf.tryPush(5);
-    if(bf.tryPush(5)) std::cout << "error, full\n";
-
-    for (int i = 0; i < 3; i++)
-    {
-        std::cout << bf.tryPop().value() << " ";
-    }
-    
-    std::cout << "\n";
+    manager.write();
 
     return 0;
 }

@@ -20,7 +20,7 @@ public:
 
 class LogManagerTests : public ::testing::Test {
 protected:
-    LogManager manager;
+    LogManager manager = LogManager(10);
     
     void SetUp() override {
         // Each test gets a fresh LogManager
@@ -183,7 +183,7 @@ TEST_F(LogManagerTests, MultipleWriteCycles) {
 // LogManagerBuilder Tests
 class LogManagerBuilderTests : public ::testing::Test {
 protected:
-    LogManagerBuilder builder;
+    LogManagerBuilder builder = LogManagerBuilder(10);
 };
 
 

@@ -1,33 +1,31 @@
 #include <iostream>
 #include <chrono>
 #include <memory>
+#include <sinks/ConsoleSinkImpl.h>
+#include <sinks/FileSinkImpl.h>
 #include "LogMessage.h"
 #include "LogManager.h"
 
 
 int main(int argc, char const *argv[])
 {
-    LogManager manager(10);
+    LogManagerBuilder lm_builder(10);
 
+    LogManager lm = lm_builder.add_sink(std::make_unique<FileSinkImpl>("l1.txt"))
+                              .add_sink(std::make_unique<FileSinkImpl>("l1.txt"))
+                              .add_sink(std::make_unique<FileSinkImpl>("l2.txt"))
+                              .add_sink(std::make_unique<FileSinkImpl>("l3.txt"))
+                              .add_sink(std::make_unique<FileSinkImpl>("l4.txt"))
+                              .add_sink(std::make_unique<FileSinkImpl>("l5.txt"))
+                              .build();
 
-    LogMessage msg1("hi", "ctx", "SeverityLvl", SeverityLvl::WARNING, "Hello World, Happy to be alive.");
-    manager << msg1;
-    LogMessage msg2("cat", "cat_ctx", "SeverityLvl", SeverityLvl::CRITICAL, "Hello cat, the app is about to crash, please do smth.");
-    manager << msg2;
-    LogMessage msg3("test", "ctx", "SeverityLvl", SeverityLvl::INFO, "Bye World, I'm not about to kill myself, just sleep.");
-    manager << msg3;
-    manager << msg3;
-    manager << msg3;
-    manager << msg3;
-    manager << msg3;
-    manager << msg3;
-    manager << msg3;
-    manager << msg3;
-    manager << msg3;
-    manager << msg3;
-    manager << msg3;
+    auto msg = LogMessage("AY 7AGA", "ay 7aga", "now", SeverityLvl::INFO, "hello world");
+    lm.add_msg(msg);
+    lm.add_msg(msg);
+    lm.add_msg(msg);
+    lm.add_msg(msg);
+    lm.add_msg(msg);
 
-    manager.write();
-
+    lm.write();
     return 0;
 }

@@ -5,7 +5,19 @@
 #include <sinks/FileSinkImpl.h>
 #include "LogMessage.h"
 #include "LogManager.h"
+#include <protection/ThreadPool.h>
 
+using namespace std::chrono_literals;
+
+ThreadPool pool(10);
+
+void printer(std::string msg){
+    while (true)
+    {
+        std::cout << msg << "\n";
+        std::this_thread::sleep_for(500ms);
+    }
+}
 
 int main(int argc, char const *argv[])
 {

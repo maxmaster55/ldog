@@ -5,6 +5,10 @@ project(ldog)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# CommonAPI
+find_package(CommonAPI REQUIRED)
+find_package(CommonAPI-SomeIP REQUIRED)
+
 # GoogleTest setup
 include(FetchContent)
 FetchContent_Declare(
@@ -22,16 +26,28 @@ add_library(ldog_lib STATIC
     src/protection/SafeSocket.cc
     src/tel_src/FileTelemetrySourceImpl.cc
     src/tel_src/SocketTelemetrySourceImpl.cc
+    src/tel_src/SomeIPTelemetrySourceImpl.cc
     src/LogManager.cc
     src/LogMessage.cc)
-target_include_directories(ldog_lib PUBLIC inc/)
+
+target_link_libraries(ldog_lib
+    PRIVATE
+    CommonAPI
+    CommonAPI-SomeIP
+)
+target_include_directories(ldog_lib PUBLIC 
+    ${CMAKE_SOURCE_DIR}/inc/
+    ${CMAKE_SOURCE_DIR}/Gen/src-gen
+)
 
 add_executable(
     ${PROJECT_NAME}
     app/main.cc
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE ldog_lib)
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    ldog_lib
+)
 
 enable_testing()
 

@@ -14,7 +14,7 @@ FileSinkImpl::FileSinkImpl(std::string path)
     
 }
 
-void FileSinkImpl::write(LogMessage& msg)
+void FileSinkImpl::write(const LogMessage& msg)
 {
     file << msg; // magic
 }

@@ -9,6 +9,6 @@ class ILogSink
 private:
 
 public:
-    virtual void write(LogMessage& msg) = 0;
+    virtual void write(const LogMessage& msg) = 0;
     virtual ~ILogSink() = default;
 };

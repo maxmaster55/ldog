@@ -6,6 +6,6 @@ class ConsoleSinkImpl: public ILogSink
 {
 public:
     ConsoleSinkImpl() = default;
-    void write(LogMessage& msg) override;
+    void write(const LogMessage& msg) override;
     ~ConsoleSinkImpl() = default;
 };

@@ -41,7 +41,7 @@ private:
     }
 
 public:
-    explicit ThreadPool(std::size_t thread_count)
+    explicit ThreadPool(std::size_t thread_count = 24)
         : stop_(false)
     {
         if (thread_count == 0)

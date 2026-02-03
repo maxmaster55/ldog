@@ -12,7 +12,7 @@ class MockSink : public ILogSink {
 public:
     std::vector<LogMessage> received_messages;
     
-    void write(LogMessage& msg) override {
+    void write(const LogMessage& msg) override {
         received_messages.push_back(msg);
     }
 };

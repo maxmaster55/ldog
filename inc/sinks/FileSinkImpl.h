@@ -8,6 +8,6 @@ private:
     std::ofstream file;
 public:
     FileSinkImpl(std::string path);
-    void write(LogMessage& msg);
+    void write(const LogMessage& msg);
     ~FileSinkImpl() = default;
 };

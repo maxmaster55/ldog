@@ -7,6 +7,11 @@
 #include "LogManager.h"
 #include <protection/ThreadPool.h>
 
+
+
+
+
+
 using namespace std::chrono_literals;
 
 ThreadPool pool(10);
@@ -23,7 +28,7 @@ int main(int argc, char const *argv[])
 {
     LogManagerBuilder lm_builder(10);
 
-    LogManager lm = lm_builder.add_sink(std::make_unique<FileSinkImpl>("l1.txt"))
+    LogManager lm = lm_builder.add_sink(std::make_unique<ConsoleSinkImpl>())
                               .add_sink(std::make_unique<FileSinkImpl>("l1.txt"))
                               .add_sink(std::make_unique<FileSinkImpl>("l2.txt"))
                               .add_sink(std::make_unique<FileSinkImpl>("l3.txt"))

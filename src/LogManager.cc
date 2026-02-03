@@ -8,23 +8,19 @@ void LogManager::add_sink(unique_ptr<ILogSink> sink)
 
 void LogManager::write()
 {
-    int msgs_size = messages.size();
-    std::vector<LogMessage> msgs = {};
-    for (int i = 0; i < msgs_size; i++)
-    {
-        auto msg = messages.tryPop();
-        if (msg)
-            msgs.push_back(msg.value());
-        
-    }
-    
+    std::vector<LogMessage> msgs;
+    msgs.reserve(messages.size());
 
-    for (auto& sink : sinks){
-        for (auto &&msg : msgs)
-            sink->write(msg);
+    while (auto msg = messages.tryPop()) {
+        msgs.push_back(std::move(*msg));
     }
 
-    msgs.clear();
+    for (auto& sink : sinks) {
+        pool_->enqueue([&sink, msgs]() {
+            for (const LogMessage& msg : msgs)
+                sink->write(msg);
+        });
+    }
 }
 
 

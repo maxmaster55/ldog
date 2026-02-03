@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <protection/RingBuffer.h>
+#include <protection/ThreadPool.h>
 #include "LogMessage.h"
 #include "./sinks/ILogSink.h"
 
@@ -15,9 +16,14 @@ class LogManager
 private:
     RingBuffer<LogMessage> messages;
     std::vector<unique_ptr<ILogSink>> sinks;
+    std::unique_ptr<ThreadPool> pool_;
 
 public:
-    LogManager(int capacity): messages(capacity) {}
+    LogManager(
+        int capacity,
+        std::unique_ptr<ThreadPool> pool = std::make_unique<ThreadPool>(24)
+    ) : messages(capacity), pool_(std::move(pool)) { }
+
     void add_msg(LogMessage& msg);
     LogManager& operator<<(LogMessage& msg);
     void add_sink(unique_ptr<ILogSink> sink);

@@ -8,16 +8,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # CommonAPI
 find_package(CommonAPI REQUIRED)
 find_package(CommonAPI-SomeIP REQUIRED)
+find_package(vsomeip3 REQUIRED)
+find_package(GTest REQUIRED)
 
-# GoogleTest setup
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-)
 
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
 
 add_library(ldog_lib STATIC 
     src/sinks/FileSinkImpl.cc
@@ -31,18 +26,26 @@ add_library(ldog_lib STATIC
     src/LogMessage.cc)
 
 target_link_libraries(ldog_lib
-    PRIVATE
+    PUBLIC
     CommonAPI
     CommonAPI-SomeIP
+    vsomeip3
 )
 target_include_directories(ldog_lib PUBLIC 
     ${CMAKE_SOURCE_DIR}/inc/
     ${CMAKE_SOURCE_DIR}/Gen/src-gen
 )
 
+set(GENERATED_SOMEIP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gen/src-gen/v1/ldog/gpu/GpuUsageDataSomeIPDeployment.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gen/src-gen/v1/ldog/gpu/GpuUsageDataSomeIPProxy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gen/src-gen/v1/ldog/gpu/GpuUsageDataSomeIPStubAdapter.cpp
+)
+
 add_executable(
     ${PROJECT_NAME}
     app/main.cc
+    ${GENERATED_SOMEIP_SOURCES}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 

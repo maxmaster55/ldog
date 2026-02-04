@@ -23,7 +23,8 @@ add_library(ldog_lib STATIC
     src/tel_src/SocketTelemetrySourceImpl.cc
     src/tel_src/SomeIPTelemetrySourceImpl.cc
     src/LogManager.cc
-    src/LogMessage.cc)
+    src/LogMessage.cc
+)
 
 target_link_libraries(ldog_lib
     PUBLIC
@@ -31,6 +32,8 @@ target_link_libraries(ldog_lib
     CommonAPI-SomeIP
     vsomeip3
 )
+
+
 target_include_directories(ldog_lib PUBLIC 
     ${CMAKE_SOURCE_DIR}/inc/
     ${CMAKE_SOURCE_DIR}/Gen/src-gen
@@ -52,6 +55,19 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     ldog_lib
 )
 
+
+
+add_executable(
+    ${PROJECT_NAME}_service
+    app/service_test.cc
+    ${GENERATED_SOMEIP_SOURCES}
+)
+
+target_link_libraries(${PROJECT_NAME}_service PRIVATE 
+    ldog_lib
+)
+
+
 enable_testing()
 
 add_executable(
@@ -62,7 +78,6 @@ add_executable(
     tests/sink_tests.cc
 )
 
-target_include_directories(tests PRIVATE inc/)
 
 target_link_libraries(
     tests

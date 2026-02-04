@@ -10,24 +10,24 @@ using namespace v1;
 constexpr std::string_view DOMAIN = "local";
 constexpr std::string_view INSTANCE = "ldog.gpu.GpuUsageData";
 
-class SomeIPTelemetrySourceImpl
+class SomeIPTelemetrySrc
 {
 
 private:
     std::shared_ptr<ldog::gpu::GpuUsageDataProxy<>> proxy_;
     float lastUsage_{0.0f};
-    SomeIPTelemetrySourceImpl();
+    SomeIPTelemetrySrc();
     void onGpuUsageCallback(float usage);
 
 public:
-    static SomeIPTelemetrySourceImpl &instance();
+    static SomeIPTelemetrySrc &instance();
     void start();
     float getLastValue() const;
     // no copy and move
-    SomeIPTelemetrySourceImpl(const SomeIPTelemetrySourceImpl &) = delete;
-    SomeIPTelemetrySourceImpl &operator=(const SomeIPTelemetrySourceImpl &) = delete;
-    SomeIPTelemetrySourceImpl(SomeIPTelemetrySourceImpl &&) = delete;
-    SomeIPTelemetrySourceImpl &operator=(SomeIPTelemetrySourceImpl &&) = delete;
+    SomeIPTelemetrySrc(const SomeIPTelemetrySrc &) = delete;
+    SomeIPTelemetrySrc &operator=(const SomeIPTelemetrySrc &) = delete;
+    SomeIPTelemetrySrc(SomeIPTelemetrySrc &&) = delete;
+    SomeIPTelemetrySrc &operator=(SomeIPTelemetrySrc &&) = delete;
 };
 
 class TelemetrySourceAdapter : public ITelemetrySource

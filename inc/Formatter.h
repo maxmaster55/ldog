@@ -8,43 +8,41 @@
 #include <LogMessage.h>
 #include <log_types.h>
 
-
-template<typename Policy_t>
+template <typename Policy_t>
 constexpr bool is_valid_policy()
 {
     return std::is_same_v<decltype(Policy_t::unit), const std::string_view> &&
-        std::is_same_v<decltype(Policy_t::context), const TelemetrySrc>;
+           std::is_same_v<decltype(Policy_t::context), const TelemetrySrc>;
 };
-
 
 template <typename Policy_t>
 class Formatter
 {
     using string = std::string;
     static_assert(is_valid_policy<Policy_t>(), "Not a valid policy");
-    
+
 public:
-    std::optional<LogMessage> formatDataToLogMsg(const std::string& raw)
+    std::optional<LogMessage> formatDataToLogMsg(const std::string &raw)
     {
-        try {
+        try
+        {
             float value = std::stof(raw);
-            string name = (Policy_t::context == TelemetrySrc::CPU) ? "cpu app" :
-                        (Policy_t::context == TelemetrySrc::GPU) ? "Gpu app" : "Ram app";
+            string name = (Policy_t::context == TelemetrySrc::CPU) ? "cpu app" : (Policy_t::context == TelemetrySrc::GPU) ? "Gpu app"
+                                                                                                                          : "Ram app";
 
             LogMessage msg = LogMessage(
                 name,
                 std::string(magic_enum::enum_name(Policy_t::context)),
                 currentTimeStamp(),
                 Policy_t::inferSeverity(value),
-                msgDescription(value)
-            );
+                msgDescription(value));
 
             return msg;
         }
-        catch (std::exception e) {
+        catch (std::exception e)
+        {
             return std::nullopt;
         }
-            
     }
 
     std::string msgDescription(float val)
@@ -54,15 +52,15 @@ public:
 
         switch (Policy_t::inferSeverity(val))
         {
-        case SeverityLvl::CRITICAL :
-            return "Critical value at " + str_val + str_unit + ", too late lil bro." ;
-        case SeverityLvl::WARNING :
-            return "Warning value is  " + str_val + str_unit + ", you can still do smth." ;
-        case SeverityLvl::INFO :
-            return "Normal value at " + str_val + str_unit + ", nothing to do." ;
+        case SeverityLvl::CRITICAL:
+            return "Critical value at " + str_val + str_unit + ", too late lil bro.";
+        case SeverityLvl::WARNING:
+            return "Warning value is  " + str_val + str_unit + ", you can still do smth.";
+        case SeverityLvl::INFO:
+            return "Normal value at " + str_val + str_unit + ", nothing to do.";
         }
         throw std::invalid_argument("not a valid float");
-    }    
+    }
     std::string currentTimeStamp()
     {
         auto n = std::chrono::system_clock::now();
@@ -75,4 +73,3 @@ public:
 
     ~Formatter() = default;
 };
-

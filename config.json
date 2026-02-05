@@ -1,0 +1,27 @@
+{
+    "logging": {
+        "rate": 100
+    },
+    "telemetry": [
+        {
+            "source": "SOMEIP",
+            "policy": "GPU",
+            "updateIntervalMs": 100
+        }
+    ],
+    "sinks": [
+        {
+            "type": "CONSOLE"
+        },
+        {
+            "type": "FILE",
+            "name": "file1",
+            "path": "./f1.log"
+        },
+        {
+            "type": "FILE",
+            "name": "file2",
+            "path": "./f2.log"
+        }
+    ]
+}

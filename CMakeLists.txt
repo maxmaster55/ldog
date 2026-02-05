@@ -24,6 +24,7 @@ add_library(ldog_lib STATIC
     src/tel_src/SomeIPTelemetrySourceImpl.cc
     src/LogManager.cc
     src/LogMessage.cc
+    src/LogDog.cc
 )
 
 target_link_libraries(ldog_lib

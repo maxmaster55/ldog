@@ -3,17 +3,17 @@
 
 using namespace std::chrono_literals;
 
-SomeIPTelemetrySourceImpl::SomeIPTelemetrySourceImpl() : lastUsage_(0)
+SomeIPTelemetrySrc::SomeIPTelemetrySrc() : lastUsage_(0)
 {
 }
 
-SomeIPTelemetrySourceImpl &SomeIPTelemetrySourceImpl::instance()
+SomeIPTelemetrySrc &SomeIPTelemetrySrc::instance()
 {
-    static SomeIPTelemetrySourceImpl inst;
+    static SomeIPTelemetrySrc inst;
     return inst;
 }
 
-void SomeIPTelemetrySourceImpl::start()
+void SomeIPTelemetrySrc::start()
 {
     auto runtime = CommonAPI::Runtime::get();
     if (!runtime)
@@ -24,7 +24,7 @@ void SomeIPTelemetrySourceImpl::start()
 
     std::cout << "using DOMAIN: " << DOMAIN << "\n";
     std::cout << "using INSTANCE: " << INSTANCE << "\n";
-    proxy_ = runtime->buildProxy<ldog::gpu::GpuUsageDataProxy>(
+        proxy_ = runtime->buildProxy<ldog::gpu::GpuUsageDataProxy>(
         std::string(DOMAIN),
         std::string(INSTANCE));
     if (!proxy_)
@@ -40,25 +40,25 @@ void SomeIPTelemetrySourceImpl::start()
         });
 }
 
-void SomeIPTelemetrySourceImpl::onGpuUsageCallback(float usage)
+void SomeIPTelemetrySrc::onGpuUsageCallback(float usage)
 {
     lastUsage_ = usage;
 }
 
-float SomeIPTelemetrySourceImpl::getLastValue() const
+float SomeIPTelemetrySrc::getLastValue() const
 {
     return lastUsage_;
 }
 
 bool TelemetrySourceAdapter::openSource()
 {
-    SomeIPTelemetrySourceImpl::instance().start();
+    SomeIPTelemetrySrc::instance().start();
     return true;
 }
 
 bool TelemetrySourceAdapter::readSource(std::string &out)
 {
     out = std::to_string(
-        SomeIPTelemetrySourceImpl::instance().getLastValue());
+        SomeIPTelemetrySrc::instance().getLastValue());
     return true;
 }

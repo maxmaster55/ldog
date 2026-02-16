@@ -1,9 +1,10 @@
 #include <iostream>
 #include <LogDog.h>
+#include <tel_src/SomeIPTelemetrySourceImpl.h>
 
 int main(int argc, char const *argv[])
 {
-    LogDog logdog("/home/maxmaster/data/ITI/projects/ldog/config.json");
+    LogDog logdog("./config.json");
 
     logdog.start();
 

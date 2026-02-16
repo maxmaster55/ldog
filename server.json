@@ -1,0 +1,26 @@
+{
+    "unicast": "192.168.1.17",
+    "logging": {
+        "level": "debug",
+        "console": "true"
+    },
+    "applications": [
+        {
+            "name": "ldog_server",
+            "id": "0x1"
+        }
+    ],
+    "services": [
+        {
+            "service": "0x1B1E",
+            "instance": "0x567A",
+            "unreliable": "30500"
+        }
+    ],
+    "routing": "ldog_server",
+    "service-discovery": {
+        "enable": "true",
+        "multicast": "224.0.0.1",
+        "port": "30500"
+    }
+}

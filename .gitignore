@@ -1,4 +1,5 @@
 build
+build-*
 *.lock
 bazel-*
 CMakeLists.txt.user

@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "x86",
+            "displayName": "Build for x86",
+            "generator": "Unix Makefiles",
+            "binaryDir": "build-x86"
+        },
+        {
+            "name": "rpi",
+            "displayName": "Build for Raspberry Pi",
+            "generator": "Unix Makefiles",
+            "binaryDir": "build-rpi",
+            "toolchainFile": "toolchains/arm-rpi-toolchain.cmake",
+            "cacheVariables": {
+                "CMAKE_SYSROOT": "/home/maxmaster/x-tools/aarch64-rpi3-linux-gnu/aarch64-rpi3-linux-gnu/sysroot"
+            }
+        }
+    ]
+}

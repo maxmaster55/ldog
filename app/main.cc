@@ -9,9 +9,18 @@ int main(int argc, char const *argv[])
     {
         configPath = argv[1];
     }
-    LogDog logdog(configPath);
+    try
+    {
+        LogDog logdog(configPath);
 
-    logdog.start();
+        logdog.start();
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Error initializing LogDog: " << e.what() << std::endl;
+
+        return 1;
+    }
 
     while (true)
     {

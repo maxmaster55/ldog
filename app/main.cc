@@ -4,7 +4,12 @@
 
 int main(int argc, char const *argv[])
 {
-    LogDog logdog("./config.json");
+    std::string configPath = "./config.json";
+    if (argc > 1)
+    {
+        configPath = argv[1];
+    }
+    LogDog logdog(configPath);
 
     logdog.start();
 

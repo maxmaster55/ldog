@@ -79,7 +79,13 @@ int main(int argc, char const *argv[])
     std::shared_ptr<service_test> myService =
         std::make_shared<service_test>();
 
-    runtime->registerService(std::string(DOMAIN), std::string(INSTANCE), myService);
+    bool succ = runtime->registerService(std::string(DOMAIN), std::string(INSTANCE), myService);
+
+    if (!succ)
+    {
+        std::cerr << "Failed to register service." << std::endl;
+        return 1;
+    }
 
     while (true)
     {

@@ -5,7 +5,10 @@
             "name": "x86",
             "displayName": "Build for x86",
             "generator": "Unix Makefiles",
-            "binaryDir": "build-x86"
+            "binaryDir": "build-x86",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
         },
         {
             "name": "rpi",

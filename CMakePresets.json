@@ -8,6 +8,9 @@
             "binaryDir": "build-x86",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "environment": {
+                "CMAKE_BUILD_PARALLEL_LEVEL": "20"
             }
         },
         {
@@ -18,6 +21,9 @@
             "toolchainFile": "toolchains/arm-rpi-toolchain.cmake",
             "cacheVariables": {
                 "CMAKE_SYSROOT": "/home/maxmaster/x-tools/aarch64-rpi3-linux-gnu/aarch64-rpi3-linux-gnu/sysroot"
+            },
+            "environment": {
+                "CMAKE_BUILD_PARALLEL_LEVEL": "20"
             }
         }
     ],
@@ -28,8 +34,7 @@
             "jobs": 12,
             "targets": [
                 "ldog_app",
-                "ldog_service",
-                "ldog_service_rand"
+                "ldog_service"
             ]
         },
         {
@@ -37,8 +42,7 @@
             "configurePreset": "rpi",
             "jobs": 12,
             "targets": [
-                "ldog_service",
-                "ldog_service_rand"
+                "ldog_service"
             ]
         }
     ]

@@ -20,5 +20,26 @@
                 "CMAKE_SYSROOT": "/home/maxmaster/x-tools/aarch64-rpi3-linux-gnu/aarch64-rpi3-linux-gnu/sysroot"
             }
         }
+    ],
+    "buildPresets": [
+        {
+            "name": "x86-build",
+            "configurePreset": "x86",
+            "jobs": 12,
+            "targets": [
+                "ldog_app",
+                "ldog_service",
+                "ldog_service_rand"
+            ]
+        },
+        {
+            "name": "rpi-build",
+            "configurePreset": "rpi",
+            "jobs": 12,
+            "targets": [
+                "ldog_service",
+                "ldog_service_rand"
+            ]
+        }
     ]
 }
